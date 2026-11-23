@@ -1,0 +1,66 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: agent
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?请设置 POSTGRES_PASSWORD}
+      POSTGRES_DB: agent_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agent -d agent_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  agent-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      LLM_BASE_URL: ${LLM_BASE_URL:-http://host.docker.internal:11434/v1}
+      LLM_MODEL: ${LLM_MODEL:-qwen3.5:4b}
+      CONTEXT_TOKENS: ${CONTEXT_TOKENS:-16384}
+      OUTPUT_TOKENS: ${OUTPUT_TOKENS:-1024}
+      VISION_MODEL: ${VISION_MODEL:-llava}
+      DATABASE_URL: postgresql+asyncpg://agent:${POSTGRES_PASSWORD:?请设置 POSTGRES_PASSWORD}@postgres:5432/agent_db
+      API_HOST: 0.0.0.0
+      API_TOKEN: ${API_TOKEN:?请设置 API_TOKEN}
+      WORKSPACE_DIR: /app/uploads
+      RAG_DATA_DIR: /app/data
+      HTTP_ALLOWED_HOSTS: ${HTTP_ALLOWED_HOSTS:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_USE_TLS: ${SMTP_USE_TLS:-true}
+    volumes:
+      - uploads:/app/uploads
+      - knowledge:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      AGENT_API_URL: http://agent-api:8000
+      API_TOKEN: ${API_TOKEN:?请设置 API_TOKEN}
+      HOST: 0.0.0.0
+      PORT: 8080
+      WEB_USERNAME: ${WEB_USERNAME:-admin}
+      WEB_PASSWORD: ${WEB_PASSWORD:?请设置 WEB_PASSWORD}
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - agent-api
+
+volumes:
+  postgres_data:
+  uploads:
+  knowledge:

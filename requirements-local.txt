@@ -1,0 +1,25 @@
+# 本地验收使用的直接依赖约束；不是跨平台完整锁文件。
+langgraph==1.2.16
+langchain-core==1.6.12
+langchain-openai==1.7.2
+fastapi==0.146.0
+uvicorn==0.54.0
+pydantic==2.14.1
+sqlalchemy==2.1.5
+asyncpg==0.32.0
+aiosqlite==0.22.1
+httpx==0.28.1
+pypdf==6.21.1
+jsonschema==4.26.0
+jinja2==3.1.6
+python-multipart==0.0.32
+pandas==3.0.6
+openpyxl==3.1.5
+sentence-transformers==6.1.0
+faiss-cpu==1.15.1
+numpy==2.5.4
+matplotlib==3.11.2
+pytest==9.1.1
+pytest-asyncio==1.4.0
+black==26.10.1
+ruff==0.17.1

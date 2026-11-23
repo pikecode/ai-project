@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地 AI 助手</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <button class="new-chat-btn" onclick="newChat()">+ 新建对话</button>
+        </div>
+        <div class="conversations" id="conversations"></div>
+    </aside>
+    <main class="main">
+        <header>
+            <h1>本地 AI 助手</h1>
+            <div id="runtime-info" class="meta" role="status">正在连接本地模型…</div>
+        </header>
+        <div class="library-control"><label for="knowledge-base">当前知识库</label>
+            <select id="knowledge-base" onchange="switchKnowledgeBase()"><option value="daily">日常知识库</option><option value="test">测试知识库</option></select>
+        </div>
+        <div id="library-banner" class="library-banner daily" role="status">日常知识库：仅检索本库资料。</div>
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('chat')">对话</div>
+            <div class="tab" onclick="switchTab('knowledge')">知识库</div>
+        </div>
+        <div id="chat-tab" class="tab-content active">
+            <div id="task-status" class="task-status" role="status" aria-live="polite">就绪</div>
+            <div id="context-warning" class="context-warning" role="status" hidden></div>
+            <div class="chat-container" id="chat" role="log" aria-live="polite"></div>
+            <div class="input-area">
+                <input type="text" id="message" aria-label="消息" placeholder="输入问题，或上传 PDF 后提问…" autofocus>
+                <input type="file" id="fileInput" accept=".pdf" style="display:none" onchange="handleFileSelect(event)">
+                <button id="uploadBtn" onclick="document.getElementById('fileInput').click()">上传 PDF</button>
+                <button id="send" onclick="send()">发送</button>
+                <button id="cancel" onclick="cancelRequest()" hidden>取消</button>
+                <button id="retry" onclick="retryLast()" hidden>重试上次请求</button>
+            </div>
+            <div id="selected-file" role="status" style="padding: 0.5rem 2rem; color: #888; font-size: 0.9rem;"></div>
+        </div>
+        <div id="knowledge-tab" class="tab-content">
+            <div class="knowledge-panel">
+                <h2 style="margin-bottom: 1rem;">知识库管理</h2>
+                <div class="knowledge-stats" id="knowledge-stats">
+                    <div>正在读取知识库…</div>
+                </div>
+                <section class="import-card" aria-labelledby="import-title">
+                    <div class="section-kicker">资料录入</div>
+                    <h3 id="import-title">先检查原文，再加入知识库</h3>
+                    <p class="help-text">支持 Markdown、UTF-8 TXT、文本型 PDF。预览不会写入知识库；扫描 PDF 暂不支持。</p>
+                    <div class="import-fields">
+                        <label class="file-field">选择资料文件
+                            <input type="file" id="knowledge-file" accept=".md,.markdown,.txt,.pdf" onchange="invalidateKnowledgePreview()">
+                        </label>
+                        <label>资料标题（选填）<input type="text" id="knowledge-title" maxlength="120" placeholder="自动读取标题或文件名" oninput="invalidateKnowledgePreview()"></label>
+                        <label>版本标记（选填）<input type="text" id="knowledge-version" maxlength="80" placeholder="自动读取，或填写如 1.0" oninput="invalidateKnowledgePreview()"></label>
+                    </div>
+                    <p class="help-text">版本仅用于标记，不代表制度已生效；不同版本并存，不自动覆盖。单文件最多 50 MiB、20 万字符、100 个片段；超过任一限制需拆分。</p>
+                    <div class="knowledge-actions">
+                        <button id="knowledge-preview-btn" onclick="previewKnowledge()">生成预览</button>
+                        <button id="knowledge-import-btn" onclick="importKnowledge()" disabled>确认导入</button>
+                    </div>
+                    <div id="knowledge-file-status" class="help-text" role="status" aria-live="polite">尚未选择文件。确认导入将写入当前知识库。</div>
+                    <section id="knowledge-preview-panel" class="preview-panel" hidden aria-labelledby="preview-heading">
+                        <h4 id="preview-heading">待导入内容</h4>
+                        <div id="knowledge-preview-meta" class="help-text"></div>
+                        <pre id="knowledge-preview-text" class="source-text" tabindex="0"></pre>
+                    </section>
+                </section>
+                <details class="manual-import">
+                    <summary>或手动粘贴资料</summary>
+                    <p class="help-text">整段文字作为一份资料导入，保留换行；此入口没有文件名和版本标记。</p>
+                    <textarea class="knowledge-input" id="knowledge-docs" aria-label="知识库文档" placeholder="粘贴完整资料正文，保留段落和标题…" maxlength="20000"></textarea>
+                    <div class="knowledge-actions"><button onclick="addKnowledge()">加入知识库</button></div>
+                    <div id="knowledge-status" role="status"></div>
+                </details>
+                <h3 style="margin-top: 2rem;">检索资料</h3>
+                <div class="knowledge-search">
+                    <input type="text" id="knowledge-query" aria-label="知识库查询" placeholder="输入要查找的内容…" style="flex:1">
+                    <button onclick="searchKnowledge()">检索</button>
+                </div>
+                <div class="search-results" id="search-results">
+                    <div style="color: #888;">添加资料后，即可在这里检索相关内容。</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <dialog id="source-dialog" class="source-dialog" aria-labelledby="source-title">
+        <div class="source-dialog-header"><div><div class="section-kicker">引用核对</div><h2 id="source-title">知识库原文</h2></div><button onclick="closeSource()" aria-label="关闭原文">关闭</button></div>
+        <div id="source-meta" class="help-text"></div>
+        <pre id="source-content" class="source-text" tabindex="0"></pre>
+        <p class="help-text">此处显示知识库保存的原文或文件片段。请核对其是否支持回答；引用存在不代表结论正确。</p>
+    </dialog>
+    <script src="/static/app.js" defer></script>
+</body>
+</html>

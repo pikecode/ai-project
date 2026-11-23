@@ -1,0 +1,9 @@
+[
+  {"name":"中文指令","message":"请记住本次验收代号 AURORA-7319，只回复已记住。","expected":"已记住"},
+  {"name":"会话续聊","message":"刚才的验收代号是什么？只回答代号。","expected":"AURORA-7319","continue":true},
+  {"name":"PDF 问答","message":"What is the approval code in this PDF? Reply with the code.","expected":"PDF-4826","attachment":"short","tool":"pdf_extract"},
+  {"name":"长 PDF 末页检索","message":"What is the final approval code on page 60? Reply with the code.","expected":"FINAL-6927","attachment":"long","tool":"pdf_extract","warning":true},
+  {"name":"知识库即时检索","message":"请检索知识库，告诉我极光验收项目的专属设备编号是什么。","expected":"KB-6927","tool":"knowledge_search"},
+  {"name":"文件读取","message":"请调用 read_file 读取 uploads/acceptance.txt，告诉我其中的校验码。","expected":"FILE-5938","tool":"read_file"},
+  {"name":"只读 SQL","message":"请调用 sql_query 执行 SELECT 23 + 19 AS result，告诉我结果。","expected":"42","tool":"sql_query"}
+]
