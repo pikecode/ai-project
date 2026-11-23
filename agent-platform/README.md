@@ -1,6 +1,13 @@
 # Agent Platform
 
-本地 AI 助手：Go 提供页面与代理，FastAPI 保存会话，LangGraph 使用原生工具调用执行任务。当前本地稳定版固定 Qwen3.5 4B 与独立的 Ollama 0.40.6，不覆盖系统 Ollama。
+本地 AI 助手：Go 提供页面与 API 代理，FastAPI 提供后端接口并保存会话，LangGraph 使用工具调用执行任务。仓库根目录下的应用代码位于 `agent-platform/`。本地稳定版使用 Qwen3.5 4B 和独立的 Ollama 0.40.6，不覆盖系统 Ollama。
+
+## 环境要求
+
+- Python 3.11 或更高版本；本地稳定版安装脚本已在 Apple Silicon macOS 与 Python 3.14 上验收。
+- Go 1.21 或更高版本；仅运行本地稳定版时由管理脚本准备前端。
+- 首次安装和模型下载需要网络及充足磁盘空间。
+- 配置参考 `.env.example`。不要提交 `.env`、`.env.local`、密钥、数据库、上传资料或运行数据。
 
 ## 本地启动
 
@@ -51,6 +58,15 @@ PDF 最多读取 200 页、20 万字符。长文件按片段检索并标注页�
 
 主要代码：`src/agent/` 执行图与预算，`src/api/` 接口，`src/models/` 数据库，`src/tools/` 工具，`frontend/` 页面与 Go 代理，`scripts/` 运行和验收，`tests/` 回归测试。
 
+创建开发环境并安装项目与开发依赖：
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -e '.[dev]'
+```
+
+以下检查命令均从 `agent-platform/` 执行：
+
 ```bash
 .venv/bin/pytest
 .venv/bin/ruff check src tests scripts
@@ -71,9 +87,7 @@ PDF 最多读取 200 页、20 万字符。长文件按片段检索并标注页�
 
 内部资料问答助手的启用、资料准备和权限边界见 [使用指南](docs/KNOWLEDGE_AGENT.md)。
 
-资料文件预览导入、版本标记与点击引用查看原文，见 [使用说明](docs/KNOWLEDGE_IMPORT.md)。
-
-资料文件导入和原文核对见 [资料导入说明](docs/KNOWLEDGE_IMPORT.md)。页面顶部可切换日常库与测试库，演示资料建议导入测试库；两库的资料、检索引用和会话分开，原有资料仍在日常库。验证记录见 [两库验收](docs/KNOWLEDGE_LIBRARIES_ACCEPTANCE.md)。
+资料文件预览导入、版本标记和引用原文核对见[资料导入说明](docs/KNOWLEDGE_IMPORT.md)。页面顶部可切换日常库与测试库；演示资料建议导入测试库，两库的资料、检索引用和会话相互隔离。验收记录见[两库验收](docs/KNOWLEDGE_LIBRARIES_ACCEPTANCE.md)。
 
 ## 结对学习教程
 
