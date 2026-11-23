@@ -1,0 +1,13 @@
+- generic [ref=e1]:
+  - complementary [ref=e2]:
+    - button "+ New Chat" [ref=e4] [cursor=pointer]
+  - main [ref=e6]:
+    - heading "Agent Platform" [level=1] [ref=e8]
+    - generic [ref=e9]:
+      - generic [ref=e10] [cursor=pointer]: Chat
+      - generic [ref=e11] [cursor=pointer]: Knowledge
+    - generic [ref=e14]:
+      - textbox "消息" [active] [ref=e15]:
+        - /placeholder: Enter your message...
+      - button "Upload PDF" [ref=e16] [cursor=pointer]
+      - button "Send" [ref=e17] [cursor=pointer]

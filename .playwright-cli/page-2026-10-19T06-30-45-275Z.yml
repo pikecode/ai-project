@@ -1,0 +1,30 @@
+- generic [ref=f1e1]:
+  - complementary [ref=f1e2]:
+    - button "+ New Chat" [ref=f1e4] [cursor=pointer]
+  - main [ref=f1e6]:
+    - heading "Agent Platform" [level=1] [ref=f1e8]
+    - generic [ref=f1e9]:
+      - generic [ref=f1e10] [cursor=pointer]: Chat
+      - generic [ref=f1e11] [cursor=pointer]: Knowledge
+    - generic [ref=f1e20]:
+      - heading "Knowledge Base Management" [level=2] [ref=f1e21]
+      - generic [ref=f1e23]:
+        - strong [ref=f1e24]: "Total Documents:"
+        - text: "1"
+      - heading "Add Documents" [level=3] [ref=f1e25]
+      - textbox "知识库文档" [ref=f1e26]:
+        - /placeholder: "Enter documents here, one per line...\nExample:\nThe quick brown fox jumps over the lazy dog.\nMachine learning is a subset of artificial intelligence.\nPython is a high-level programming language."
+      - generic [ref=f1e27]:
+        - button "Add to Knowledge Base" [ref=f1e28] [cursor=pointer]
+        - button "Refresh Stats" [ref=f1e29] [cursor=pointer]
+      - heading "Search Knowledge" [level=3] [ref=f1e30]
+      - generic [ref=f1e31]:
+        - textbox "知识库查询" [ref=f1e32]:
+          - /placeholder: Enter search query...
+          - text: 本地验收初始化标记
+        - button "Search" [active] [ref=f1e33] [cursor=pointer]
+      - generic [ref=f1e36]:
+        - generic [ref=f1e37]:
+          - strong [ref=f1e38]: Result 1
+          - text: "(score: 0.797)"
+        - generic [ref=f1e39]: 本地验收初始化标记 WARMUP-20261019。...

@@ -1,0 +1,20 @@
+- generic [ref=f2e1]:
+  - complementary [ref=f2e2]:
+    - button "+ New Chat" [ref=f2e4] [cursor=pointer]
+    - generic [ref=f2e5]:
+      - button "请调用 sql_query 工具执行 SELECT 23 + 19 AS result，告诉我结果。" [ref=f2e6] [cursor=pointer]
+      - button "请调用 read_file 工具读取 uploads/acceptance.txt，告诉我其中的校验" [ref=f2e7] [cursor=pointer]
+      - button "请检索知识库，告诉我极光验收项目的专属设备编号是什么。" [ref=f2e8] [cursor=pointer]
+      - button "这份文件的审批编号是什么？只回答编号。" [ref=f2e9] [cursor=pointer]
+      - button "请记住：本次验收代号为 AURORA-7319。只回复“已记住”。" [ref=f2e10] [cursor=pointer]
+      - button "请记住：本次验收代号为 AURORA-7319。只回复“已记住”。" [ref=f2e11] [cursor=pointer]
+  - main [ref=f2e12]:
+    - heading "Agent Platform" [level=1] [ref=f2e14]
+    - generic [ref=f2e15]:
+      - generic [ref=f2e16] [cursor=pointer]: Chat
+      - generic [ref=f2e17] [cursor=pointer]: Knowledge
+    - generic [ref=f2e20]:
+      - textbox "消息" [active] [ref=f2e21]:
+        - /placeholder: Enter your message...
+      - button "Upload PDF" [ref=f2e22] [cursor=pointer]
+      - button "Send" [ref=f2e23] [cursor=pointer]

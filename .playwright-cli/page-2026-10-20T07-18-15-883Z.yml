@@ -1,0 +1,34 @@
+- generic [ref=e1]:
+  - complementary [ref=e2]:
+    - button "+ 新建对话" [ref=e4] [cursor=pointer]
+    - button "根据资料，办公费用正好800元谁审批？请用一句话回答，并附KB引用。" [ref=e56] [cursor=pointer]
+  - main [ref=e6]:
+    - generic [ref=e7]:
+      - heading "本地 AI 助手" [level=1] [ref=e8]
+      - status [ref=e9]: 本地模型：Qwen3.5 4B（固定版本）
+    - generic [ref=e10]:
+      - generic [ref=e11] [cursor=pointer]: 对话
+      - generic [ref=e12] [cursor=pointer]: 知识库
+    - generic [ref=e13]:
+      - status [ref=e14]: 已完成
+      - log [ref=e15]:
+        - generic [ref=e53]: 根据资料，办公费用正好800元谁审批？请用一句话回答，并附KB引用。
+        - generic [ref=e54]:
+          - text: 办公费用正好800元由部门负责人审批（依据：
+          - button "查看引用原文 KB-20174e1caa4157c6" [ref=e57] [cursor=pointer]: KB-20174e1caa4157c6
+          - text: ）。
+      - generic [ref=e16]:
+        - textbox "消息" [ref=e17]:
+          - /placeholder: 输入问题，或上传 PDF 后提问…
+        - button "上传 PDF" [ref=e18] [cursor=pointer]
+        - button "发送" [ref=e19] [cursor=pointer]
+      - status [ref=e20]
+  - dialog [ref=e58]:
+    - generic [ref=e59]:
+      - generic [ref=e60]:
+        - generic [ref=e61]: 引用核对
+        - heading "澄星演示公司报销操作说明" [level=2] [ref=e62]
+      - button "关闭原文" [active] [ref=e63] [cursor=pointer]: 关闭
+    - generic [ref=e64]: KB-20174e1caa4157c6 · 01-报销操作说明.md · 版本 1.1 · 片段 1/1
+    - generic [ref=e65]: "# 澄星演示公司报销操作说明 文件名：01-报销操作说明.md 版本：1.1 片段：1/1 # 澄星演示公司报销操作说明 > 虚构演示资料，仅用于助手测试，不是任何真实公司的制度。 资料编号：DEMO-EXP-001 版本：1.1 生效日期：2026-10-01 状态：本演示场景有效 适用范围：澄星演示公司日常办公费用；不适用于采购合同或差旅补贴。 ## 提交材料与入口 申请人在“演示办公台 → 费用 → 新建报销”提交电子发票、付款凭证及费用用途说明。材料不全时，财务退回并注明缺失项；申请人补齐后重新提交。 ## 审批与付款 费用不超过 800 元（含 800 元），由部门负责人审批；超过 800 元，先由部门负责人审批，再由财务负责人审批。财务审核通过后，在 5 个工作日内付款；补充材料所用时间不计入该期限。 审批级别按每笔申请的总金额判断。超过 800 元时，整笔申请经过上述两级审批，不是只审批超出的部分。800 元是审批分级界限，不是本文规定的报销金额上限。 ## 缺失信息 本说明没有规定每月报销总额度，也没有说明逾期提交期限。不能据此推断没有额度限制或没有期限限制。差旅住宿标准见 DEMO-TRAVEL-001。"
+    - paragraph [ref=e66]: 此处显示知识库保存的原文或文件片段。请核对其是否支持回答；引用存在不代表结论正确。

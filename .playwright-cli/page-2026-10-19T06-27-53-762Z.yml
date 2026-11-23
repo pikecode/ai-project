@@ -1,0 +1,20 @@
+- generic [active] [ref=e1]:
+  - complementary [ref=e2]:
+    - button "+ New Chat" [ref=e4] [cursor=pointer]
+    - generic [ref=e5]:
+      - button "你好，请简单介绍自己。" [ref=e19] [cursor=pointer]
+      - button "你好" [ref=e20] [cursor=pointer]
+  - main [ref=e6]:
+    - heading "Agent Platform" [level=1] [ref=e8]
+    - generic [ref=e9]:
+      - generic [ref=e10] [cursor=pointer]: Chat
+      - generic [ref=e11] [cursor=pointer]: Knowledge
+    - generic [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e21]: 你好，请简单介绍自己。
+        - generic [ref=e22]: 处理失败：任务执行失败或超时，请检查模型和工具服务后重试。
+      - generic [ref=e14]:
+        - textbox "消息" [ref=e15]:
+          - /placeholder: Enter your message...
+        - button "Upload PDF" [ref=e16] [cursor=pointer]
+        - button "Send" [ref=e17] [cursor=pointer]

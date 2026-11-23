@@ -1,0 +1,42 @@
+- generic [ref=e1]:
+  - complementary [ref=e2]:
+    - button "+ 新建对话" [ref=e4] [cursor=pointer]
+  - main [ref=e6]:
+    - generic [ref=e7]:
+      - heading "本地 AI 助手" [level=1] [ref=e8]
+      - status [ref=e9]: 本地模型：Qwen3.5 4B（固定版本）
+    - generic [ref=e10]:
+      - generic [ref=e11] [cursor=pointer]: 对话
+      - generic [ref=e12] [cursor=pointer]: 知识库
+    - generic [ref=e22]:
+      - heading "知识库管理" [level=2] [ref=e23]
+      - generic [ref=e24]: 当前知识库 · 0 个资料片段
+      - region [ref=e25]:
+        - generic [ref=e26]: 资料录入
+        - heading "先检查原文，再加入知识库" [level=3] [ref=e27]
+        - paragraph [ref=e28]: 支持 Markdown、UTF-8 TXT、文本型 PDF。预览不会写入知识库；扫描 PDF 暂不支持。
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - text: 选择资料文件
+            - button "选择资料文件" [active] [ref=e31]
+          - generic [ref=e32]:
+            - text: 资料标题（选填）
+            - textbox "资料标题（选填）" [ref=e33]:
+              - /placeholder: 自动读取标题或文件名
+          - generic [ref=e34]:
+            - text: 版本标记（选填）
+            - textbox "版本标记（选填）" [ref=e35]:
+              - /placeholder: 自动读取，或填写如 1.0
+        - paragraph [ref=e36]: 版本仅用于标记，不代表制度已生效。单文件最多 50 MiB、20 万字符、100 个片段；超过任一限制需拆分。
+        - generic [ref=e37]:
+          - button "生成预览" [ref=e38] [cursor=pointer]
+          - button "确认导入" [disabled] [ref=e39]
+        - status [ref=e40]: 内容已变更，请生成预览。尚未写入知识库。
+      - group [ref=e41]:
+        - generic "或手动粘贴资料" [ref=e42] [cursor=pointer]
+      - heading "检索资料" [level=3] [ref=e43]
+      - generic [ref=e44]:
+        - textbox "知识库查询" [ref=e45]:
+          - /placeholder: 输入要查找的内容…
+        - button "检索" [ref=e46] [cursor=pointer]
+      - generic [ref=e47]: 添加资料后，即可在这里检索相关内容。

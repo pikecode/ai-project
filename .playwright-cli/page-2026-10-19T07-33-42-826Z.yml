@@ -1,0 +1,24 @@
+- generic [active] [ref=e1]:
+  - complementary [ref=e2]:
+    - button "+ 新建对话" [ref=e4] [cursor=pointer]
+    - button "请从1开始连续列出数字直到10000，不要提前结束。" [ref=e26] [cursor=pointer]
+  - main [ref=e6]:
+    - generic [ref=e7]:
+      - heading "本地 AI 助手" [level=1] [ref=e8]
+      - status [ref=e9]: 本地模型：Qwen3.5 4B（固定版本）
+    - generic [ref=e10]:
+      - generic [ref=e11] [cursor=pointer]: 对话
+      - generic [ref=e12] [cursor=pointer]: 知识库
+    - generic [ref=e13]:
+      - status [ref=e14]: 已完成
+      - log [ref=e15]:
+        - generic [ref=e21]: 请从1开始连续列出数字直到10000，不要提前结束。
+        - generic [ref=e22]: 已取消本次请求。
+        - generic [ref=e27]: 请只回复：取消后恢复正常。
+        - generic [ref=e28]: 取消后恢复正常。
+      - generic [ref=e16]:
+        - textbox "消息" [ref=e17]:
+          - /placeholder: 输入问题，或上传 PDF 后提问…
+        - button "上传 PDF" [ref=e18] [cursor=pointer]
+        - button "发送" [ref=e19] [cursor=pointer]
+      - status [ref=e20]

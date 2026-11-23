@@ -1,0 +1,23 @@
+- generic [active] [ref=e1]:
+  - complementary [ref=e2]:
+    - button "+ 新建对话" [ref=e4] [cursor=pointer]
+  - main [ref=e6]:
+    - generic [ref=e7]:
+      - heading "本地 AI 助手" [level=1] [ref=e8]
+      - status [ref=e9]: 本地模型：Qwen3.5 4B（固定版本）
+    - generic [ref=e10]:
+      - generic [ref=e11] [cursor=pointer]: 对话
+      - generic [ref=e12] [cursor=pointer]: 知识库
+    - generic [ref=e13]:
+      - status [ref=e14]: 模型正在处理…
+      - log [ref=e15]:
+        - generic [ref=e53]: 根据资料，办公费用正好800元谁审批？请用一句话回答，并附KB引用。
+        - generic [ref=e54]: 正在处理…
+      - generic [ref=e16]:
+        - textbox "消息" [ref=e17]:
+          - /placeholder: 输入问题，或上传 PDF 后提问…
+          - text: 根据资料，办公费用正好800元谁审批？请用一句话回答，并附KB引用。
+        - button "上传 PDF" [disabled] [ref=e18]
+        - button "发送" [disabled] [ref=e19]
+        - button "取消" [ref=e55] [cursor=pointer]
+      - status [ref=e20]

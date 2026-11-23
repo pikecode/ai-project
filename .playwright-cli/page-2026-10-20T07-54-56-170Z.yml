@@ -1,0 +1,25 @@
+- generic [ref=e1]:
+  - complementary [ref=e2]:
+    - button "+ 新建对话" [ref=e4] [cursor=pointer]
+  - main [ref=e6]:
+    - generic [ref=e7]:
+      - heading "本地 AI 助手" [level=1] [ref=e8]
+      - status [ref=e9]: 本地模型：Qwen3.5 4B（固定版本）
+    - generic [ref=e10]:
+      - generic [ref=e11]: 当前知识库
+      - combobox "当前知识库" [ref=e12]:
+        - option "日常知识库" [selected]
+        - option "测试知识库"
+    - status [ref=e13]: 日常知识库：仅检索本库资料。
+    - generic [ref=e14]:
+      - generic [ref=e15] [cursor=pointer]: 对话
+      - generic [ref=e16] [cursor=pointer]: 知识库
+    - generic [ref=e17]:
+      - status [ref=e18]: 就绪
+      - log [ref=e19]
+      - generic [ref=e20]:
+        - textbox "消息" [active] [ref=e21]:
+          - /placeholder: 输入问题，或上传 PDF 后提问…
+        - button "上传 PDF" [ref=e22] [cursor=pointer]
+        - button "发送" [ref=e23] [cursor=pointer]
+      - status [ref=e24]
